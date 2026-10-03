@@ -89,7 +89,7 @@
     </section>
 
     <!-- SECTION 3: BIRTHDAY CELEBRATION (Cinematic) -->
-    <section id="sec-3" class="hidden absolute inset-0 flex flex-col items-center justify-center p-6 text-center z-10 bg-[#0a0508] transition-colors duration-[3000ms] overflow-hidden perspective-[1000px]">
+    <section id="sec-3" class="hidden absolute inset-0 flex flex-col items-center justify-center p-6 text-center z-10 bg-[#280915] transition-colors duration-[3000ms] overflow-hidden perspective-[1000px]">
         
         <!-- Fairy lights / Bokeh background -->
         <div class="absolute inset-0 z-0 opacity-0 transition-opacity duration-[3000ms]" id="s3-bokeh">
@@ -103,67 +103,53 @@
         <div id="s3-particles" class="absolute inset-0 z-0 pointer-events-none"></div>
 
         <!-- "Happy Birthday" Text (Behind Cake) -->
-        <div class="absolute top-32 md:top-1/4 left-0 w-full z-10 flex justify-center perspective-[1000px]">
-            <h1 class="text-6xl md:text-8xl lg:text-9xl font-handwritten font-bold text-transparent bg-clip-text bg-gradient-to-b from-white via-[#ffe4e6] to-[#fda4af] opacity-0 transform translate-z-[-100px] scale-90 transition-all duration-[2000ms] drop-shadow-[0_0_20px_rgba(255,192,203,0.6)]" id="s3-text">
-                Happy Birthday, Babuu! 🎂❤️
-            </h1>
-        </div>
-
-        <!-- Left Bouquets & Balloons -->
-        <div class="absolute -left-10 md:left-10 bottom-0 md:bottom-10 z-20 flex flex-col items-center opacity-0 transform -translate-x-20 transition-all duration-[2000ms]" id="s3-left-decor">
-            <!-- Balloons -->
-            <div class="relative w-32 h-40 md:w-48 md:h-64 mb-4 animate-float">
-                <img src="https://cdn-icons-png.flaticon.com/512/8155/8155385.png" class="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(255,192,203,0.4)]" alt="Balloons">
-            </div>
-            <!-- Bouquet -->
-            <div class="relative w-40 h-40 md:w-64 md:h-64 animate-breathe">
-                <img src="https://cdn-icons-png.flaticon.com/512/4020/4020110.png" class="w-full h-full object-contain filter drop-shadow-[0_0_20px_rgba(255,192,203,0.3)]" alt="Bouquet">
+        <div class="absolute top-6 md:top-10 left-0 w-full z-10 flex justify-center perspective-[1000px]">
+            <div class="relative inline-block">
+                <span class="absolute -top-6 left-[48%] -translate-x-1/2 text-4xl md:text-5xl text-yellow-400 drop-shadow-[0_0_15px_rgba(250,204,21,0.8)] z-20 animate-[bounce_2s_infinite]" id="s3-crown">👑</span>
+                <h1 class="text-6xl md:text-8xl lg:text-9xl font-handwritten font-bold text-transparent bg-clip-text bg-gradient-to-b from-white via-[#ffe4e6] to-[#fda4af] opacity-0 transform translate-z-[-100px] scale-90 transition-all duration-[2000ms] drop-shadow-[0_0_20px_rgba(236,72,153,0.8)]" id="s3-text">
+                    Happy Birthday ♡
+                </h1>
             </div>
         </div>
 
-        <!-- Right Bouquets & Balloons -->
-        <div class="absolute -right-10 md:right-10 bottom-0 md:bottom-10 z-20 flex flex-col items-center opacity-0 transform translate-x-20 transition-all duration-[2000ms]" id="s3-right-decor">
-            <!-- Balloons -->
-            <div class="relative w-32 h-40 md:w-48 md:h-64 mb-4 animate-float" style="animation-delay: 0.5s;">
-                <img src="https://cdn-icons-png.flaticon.com/512/8155/8155385.png" class="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(255,192,203,0.4)] transform -scale-x-100" alt="Balloons">
+        <!-- Decor Elements -->
+        <div id="s3-left-decor" class="absolute inset-0 pointer-events-none opacity-0 transform -translate-x-20 transition-all duration-[2000ms]">
+            <!-- Top Left Balloon Cluster -->
+            <div class="absolute -left-2 md:left-4 top-2 md:top-10 z-20 animate-float pointer-events-auto w-32 h-40 md:w-56 md:h-64">
+                <img src="images/balloons.png" class="w-full h-full object-contain drop-shadow-[0_10px_10px_rgba(255,0,0,0.4)] transform -rotate-12" alt="Balloon">
             </div>
-            <!-- Bouquet -->
-            <div class="relative w-40 h-40 md:w-64 md:h-64 animate-breathe" style="animation-delay: 0.8s;">
-                <img src="https://cdn-icons-png.flaticon.com/512/4020/4020110.png" class="w-full h-full object-contain filter drop-shadow-[0_0_20px_rgba(255,192,203,0.3)] transform -scale-x-100" alt="Bouquet">
+            <!-- Bottom Left Bouquet -->
+            <div class="absolute left-4 md:left-12 bottom-6 md:bottom-12 z-20 animate-breathe w-28 h-40 md:w-48 md:h-72 bg-[#fcf5ef] p-2 md:p-3 rounded-2xl md:rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] pointer-events-auto">
+                <img src="images/flower_bouquet.webp" class="w-full h-full object-cover filter rounded-xl md:rounded-2xl" alt="Bouquet">
+            </div>
+        </div>
+
+        <div id="s3-right-decor" class="absolute inset-0 pointer-events-none opacity-0 transform translate-x-20 transition-all duration-[2000ms]">
+            <!-- Top Right Balloon Cluster -->
+            <div class="absolute -right-2 md:right-4 top-2 md:top-10 z-20 animate-float pointer-events-auto w-32 h-40 md:w-56 md:h-64" style="animation-delay: 0.5s;">
+                <img src="images/balloons.png" class="w-full h-full object-contain drop-shadow-[0_10px_10px_rgba(255,0,0,0.4)] transform rotate-12 -scale-x-100" alt="Balloon">
+            </div>
+            <!-- Bottom Right Bouquet -->
+            <div class="absolute right-4 md:right-12 bottom-6 md:bottom-12 z-20 animate-breathe w-28 h-40 md:w-48 md:h-72 bg-[#fcf5ef] p-2 md:p-3 rounded-2xl md:rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] pointer-events-auto" style="animation-delay: 0.8s;">
+                <img src="images/flower_bouquet.webp" class="w-full h-full object-cover filter rounded-xl md:rounded-2xl transform -scale-x-100" alt="Bouquet">
             </div>
         </div>
 
         <!-- Center Stage: Cake & Button -->
-        <div class="relative z-30 flex flex-col items-center mt-32 md:mt-48 w-full justify-center">
+        <div class="relative z-30 flex flex-col items-center mt-12 md:mt-20 w-full justify-center">
             
             <!-- Cake Container -->
-            <div class="relative w-64 h-64 md:w-96 md:h-96 opacity-0 transform scale-75 transition-all duration-[2000ms]" id="s3-cake-container">
+            <div class="relative w-64 h-64 md:w-[24rem] md:h-[24rem] opacity-0 transform scale-75 transition-all duration-[2000ms]" id="s3-cake-container">
                 <!-- Glowing platform -->
                 <div class="absolute bottom-[-10px] left-1/2 -translate-x-1/2 w-[90%] h-8 md:h-12 bg-gradient-to-t from-pink-400/40 to-transparent blur-xl md:blur-2xl rounded-[100%]"></div>
                 
-                <!-- The Cake -->
-                <!-- Premium 3D looking cake PNG -->
-                <img src="https://cdn-icons-png.flaticon.com/512/3159/3159453.png" alt="Premium Birthday Cake" class="w-full h-full object-contain relative z-10 drop-shadow-[0_25px_25px_rgba(0,0,0,0.6)] filter contrast-110 saturate-110">
+                <img src="images/cake.webp" alt="Premium Birthday Cake" class="w-full h-full object-cover rounded-3xl md:rounded-[2rem] relative z-10 drop-shadow-[0_15px_25px_rgba(0,0,0,0.5)]">
                 
-                <!-- Candles & Flame -->
-                <div class="absolute top-[8%] md:top-[12%] left-1/2 -translate-x-1/2 flex gap-4 md:gap-6 z-20">
-                    <div id="candle-1" class="opacity-0 transition-opacity duration-1000 w-2 md:w-3 h-10 md:h-14 bg-gradient-to-b from-white to-pink-200 rounded-sm relative shadow-sm">
-                        <div class="absolute -top-4 md:-top-5 left-1/2 -translate-x-1/2 w-3 md:w-4 h-4 md:h-5 bg-yellow-200 rounded-[50%_50%_20%_20%] shadow-[0_0_15px_3px_rgba(253,224,71,0.9)] animate-flicker"></div>
-                        <div class="absolute -top-6 left-1/2 -translate-x-1/2 w-10 h-10 bg-orange-400/20 blur-md rounded-full"></div>
-                    </div>
-                    <div id="candle-2" class="opacity-0 transition-opacity duration-1000 w-2 md:w-3 h-12 md:h-16 bg-gradient-to-b from-white to-pink-200 rounded-sm relative -mt-2 shadow-sm">
-                        <div class="absolute -top-4 md:-top-5 left-1/2 -translate-x-1/2 w-3 md:w-4 h-4 md:h-5 bg-yellow-200 rounded-[50%_50%_20%_20%] shadow-[0_0_15px_3px_rgba(253,224,71,0.9)] animate-flicker" style="animation-delay: 0.1s;"></div>
-                        <div class="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 bg-orange-400/20 blur-md rounded-full"></div>
-                    </div>
-                    <div id="candle-3" class="opacity-0 transition-opacity duration-1000 w-2 md:w-3 h-10 md:h-14 bg-gradient-to-b from-white to-pink-200 rounded-sm relative shadow-sm">
-                        <div class="absolute -top-4 md:-top-5 left-1/2 -translate-x-1/2 w-3 md:w-4 h-4 md:h-5 bg-yellow-200 rounded-[50%_50%_20%_20%] shadow-[0_0_15px_3px_rgba(253,224,71,0.9)] animate-flicker" style="animation-delay: 0.2s;"></div>
-                        <div class="absolute -top-6 left-1/2 -translate-x-1/2 w-10 h-10 bg-orange-400/20 blur-md rounded-full"></div>
-                    </div>
-                </div>
             </div>
             
-            <button onclick="nextSection(3, 4)" class="opacity-0 transition-opacity duration-[2000ms] mt-8 md:mt-12 inline-block bg-white/10 backdrop-blur-md border border-white/20 text-white font-medium text-lg py-4 px-10 rounded-full shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:bg-white/20 hover:shadow-[0_0_30px_rgba(255,192,203,0.4)] transition-all transform hover:scale-105 active:scale-95" id="s3-btn">
-                Ek chhota sa note hai tumhare liye 💌
+            <button onclick="handleGiftClick()" class="opacity-0 transition-opacity duration-[2000ms] mt-6 md:mt-8 inline-flex items-center justify-center gap-2 bg-transparent border border-pink-300/60 text-white/90 font-light text-sm md:text-base py-3 px-8 rounded-full shadow-[0_0_15px_rgba(236,72,153,0.3)] hover:bg-white/10 hover:shadow-[0_0_20px_rgba(236,72,153,0.5)] transition-all transform hover:scale-105 active:scale-95 group" id="s3-btn">
+                <span>A little surprise for you... 🎁</span>
+                <span class="inline-block transition-transform duration-300 group-hover:translate-x-1 animate-bounce">→</span>
             </button>
         </div>
     </section>

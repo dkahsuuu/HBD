@@ -38,7 +38,57 @@ document.body.addEventListener('click', () => {
     }
 }, {once: true});
 
-
+// Navigation between sections
+function handleGiftClick() {
+    const btn = document.getElementById('s3-btn');
+    const sec3 = document.getElementById('sec-3');
+    
+    // Create dark overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'fixed inset-0 bg-black/80 z-[40] transition-opacity duration-1000 opacity-0';
+    document.body.appendChild(overlay);
+    
+    // Transform button to gift box
+    btn.style.position = 'fixed';
+    const rect = btn.getBoundingClientRect();
+    btn.style.top = rect.top + 'px';
+    btn.style.left = rect.left + 'px';
+    btn.style.width = rect.width + 'px';
+    btn.style.height = rect.height + 'px';
+    
+    requestAnimationFrame(() => {
+        overlay.classList.remove('opacity-0');
+        overlay.classList.add('opacity-100');
+        
+        btn.innerHTML = '🎁';
+        btn.className = 'fixed z-[50] transition-all duration-1000 transform scale-[3] drop-shadow-[0_0_50px_rgba(236,72,153,1)] flex items-center justify-center bg-transparent border-none';
+        btn.style.top = '50%';
+        btn.style.left = '50%';
+        btn.style.width = '100px';
+        btn.style.height = '100px';
+        btn.style.transform = 'translate(-50%, -50%) scale(2)';
+        
+        setTimeout(() => {
+            // Burst effects
+            confetti({
+                particleCount: 150,
+                spread: 120,
+                origin: { y: 0.5 },
+                colors: ['#ffc0cb', '#ff69b4', '#ff1493', '#ffd700'],
+                shapes: ['circle', 'square']
+            });
+            
+            btn.style.transform = 'translate(-50%, -50%) scale(2.5) rotate(5deg)';
+            btn.innerHTML = '✨🎁✨';
+            
+            setTimeout(() => {
+                overlay.style.opacity = '0';
+                nextSection(3, 4);
+                setTimeout(() => overlay.remove(), 1000);
+            }, 1200);
+        }, 1500);
+    });
+}
 // Navigation between sections
 function nextSection(current, next) {
     const currentSec = document.getElementById(`sec-${current}`);
@@ -101,8 +151,8 @@ function triggerSectionAnimations(section) {
         
         // 1. Bg becomes brighter & bokeh appears
         setTimeout(() => {
-            sec3.classList.remove('bg-[#0a0508]');
-            sec3.classList.add('bg-[#1a0b16]');
+            sec3.classList.remove('bg-[#280915]');
+            sec3.classList.add('bg-[#380c1e]');
             bokeh.classList.remove('opacity-0');
             bokeh.classList.add('opacity-50');
             
@@ -131,19 +181,7 @@ function triggerSectionAnimations(section) {
             cakeContainer.classList.add('opacity-100', 'scale-100');
         }, 4000);
 
-        // 5. Candles light up one by one
-        setTimeout(() => {
-            candles[0].classList.remove('opacity-0');
-            candles[0].classList.add('opacity-100');
-        }, 5500);
-        setTimeout(() => {
-            candles[1].classList.remove('opacity-0');
-            candles[1].classList.add('opacity-100');
-        }, 6000);
-        setTimeout(() => {
-            candles[2].classList.remove('opacity-0');
-            candles[2].classList.add('opacity-100');
-        }, 6500);
+
 
         // 6. Burst of sparkles and confetti
         setTimeout(() => {
@@ -401,40 +439,57 @@ function createSparkles() {
     const container = document.getElementById('s3-particles');
     if(!container) return;
     
-    // Create new sparkles periodically for a few seconds
+    // Create new sparkles and petals periodically
     const interval = setInterval(() => {
         const sparkle = document.createElement('div');
-        // Mix of stars and hearts
-        sparkle.innerHTML = Math.random() > 0.7 ? '❤️' : '✨';
+        // Mix of stars, hearts, and rose petals
+        const rand = Math.random();
+        sparkle.innerHTML = rand > 0.8 ? '❤️' : rand > 0.4 ? '🌹' : '✨';
         sparkle.style.position = 'absolute';
         sparkle.style.left = Math.random() * 100 + 'vw';
-        sparkle.style.top = Math.random() * 100 + 'vh';
-        sparkle.style.fontSize = (Math.random() * 10 + 10) + 'px';
+        sparkle.style.top = (Math.random() * 120 - 10) + 'vh'; // start slightly offscreen sometimes
+        sparkle.style.fontSize = (Math.random() * 15 + 10) + 'px';
         sparkle.style.opacity = '0';
-        sparkle.style.transition = 'all 3s ease-in-out';
-        sparkle.style.transform = 'translateY(0) scale(0.5)';
-        sparkle.style.filter = 'drop-shadow(0 0 5px rgba(255,255,255,0.8))';
+        sparkle.style.transition = 'all 5s cubic-bezier(0.25, 1, 0.5, 1)';
+        sparkle.style.transform = `translateY(0) scale(0.5) rotate(${Math.random() * 360}deg)`;
+        sparkle.style.filter = 'drop-shadow(0 0 8px rgba(255,192,203,0.6))';
+        sparkle.style.zIndex = Math.random() > 0.5 ? '5' : '35'; // some behind, some in front
         
         container.appendChild(sparkle);
         
-        // Fade in and float up
+        // Fade in and float
         setTimeout(() => {
-            sparkle.style.opacity = Math.random() > 0.5 ? '0.8' : '0.4';
-            sparkle.style.transform = `translateY(-${Math.random() * 100 + 50}px) scale(1)`;
+            sparkle.style.opacity = rand > 0.8 ? '0.6' : '0.4';
+            sparkle.style.transform = `translateY(-${Math.random() * 150 + 50}px) translateX(${Math.random() * 100 - 50}px) scale(1) rotate(${Math.random() * 360}deg)`;
         }, 100);
         
         // Fade out
         setTimeout(() => {
             sparkle.style.opacity = '0';
-        }, 3000);
+        }, 4000);
         
         // Remove from DOM
         setTimeout(() => {
             sparkle.remove();
         }, 6000);
-    }, 400);
-    
-    // Stop creating them after 15 seconds so we don't leak memory indefinitely,
-    // or just let them run because they clean themselves up.
-    // Let's keep them running while the section is active.
+    }, 200);
 }
+
+// Parallax effect for Section 3
+document.addEventListener('mousemove', (e) => {
+    const sec3 = document.getElementById('sec-3');
+    if (!sec3 || !sec3.classList.contains('active-section')) return;
+
+    const x = (e.clientX / window.innerWidth - 0.5) * 20;
+    const y = (e.clientY / window.innerHeight - 0.5) * 20;
+
+    const leftDecor = document.getElementById('s3-left-decor');
+    const rightDecor = document.getElementById('s3-right-decor');
+    const cakeContainer = document.getElementById('s3-cake-container');
+    const bokeh = document.getElementById('s3-bokeh');
+
+    if (leftDecor) leftDecor.style.transform = `translate(${x * 1.5}px, ${y * 1.5}px)`;
+    if (rightDecor) rightDecor.style.transform = `translate(${-x * 1.5}px, ${y * 1.5}px)`;
+    if (cakeContainer) cakeContainer.style.transform = `translate(${x * 0.5}px, ${y * 0.5}px) scale(1)`;
+    if (bokeh) bokeh.style.transform = `translate(${-x * 2}px, ${-y * 2}px)`;
+});
