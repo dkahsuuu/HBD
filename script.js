@@ -49,12 +49,13 @@ function handleGiftClick() {
     document.body.appendChild(overlay);
     
     // Transform button to gift box
-    btn.style.position = 'fixed';
     const rect = btn.getBoundingClientRect();
     btn.style.top = rect.top + 'px';
     btn.style.left = rect.left + 'px';
     btn.style.width = rect.width + 'px';
     btn.style.height = rect.height + 'px';
+    btn.style.position = 'fixed';
+    btn.style.margin = '0'; // reset margins so it doesn't shift
     
     requestAnimationFrame(() => {
         overlay.classList.remove('opacity-0');
@@ -70,13 +71,17 @@ function handleGiftClick() {
         
         setTimeout(() => {
             // Burst effects
-            confetti({
-                particleCount: 150,
-                spread: 120,
-                origin: { y: 0.5 },
-                colors: ['#ffc0cb', '#ff69b4', '#ff1493', '#ffd700'],
-                shapes: ['circle', 'square']
-            });
+            try {
+                confetti({
+                    particleCount: 150,
+                    spread: 120,
+                    origin: { y: 0.5 },
+                    colors: ['#ffc0cb', '#ff69b4', '#ff1493', '#ffd700'],
+                    shapes: ['circle', 'square']
+                });
+            } catch(e) {
+                console.error("Confetti failed", e);
+            }
             
             btn.style.transform = 'translate(-50%, -50%) scale(2.5) rotate(5deg)';
             btn.innerHTML = '✨🎁✨';
