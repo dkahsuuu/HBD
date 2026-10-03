@@ -1,0 +1,123 @@
+/* Custom Animations and Utilities */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.active-section {
+    display: flex !important;
+}
+
+/* Custom Scrollbar for memory section */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes floatHeart {
+    0% { transform: translateY(0) scale(1); opacity: 0; }
+    10% { opacity: 0.8; }
+    50% { transform: translateY(-50vh) scale(1.2); }
+    100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+}
+
+.floating-heart {
+    position: absolute;
+    bottom: -50px;
+    font-size: 24px;
+    animation: floatHeart 7s linear forwards;
+    z-index: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+@keyframes bounceSlow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+.animate-bounce-slow {
+    animation: bounceSlow 3s infinite ease-in-out;
+}
+
+.text-shadow-glow {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(236, 72, 153, 0.8);
+}
+
+@keyframes pulseSlow {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.animate-pulse-slow {
+    animation: pulseSlow 2s infinite ease-in-out;
+}
+
+/* Typewriter cursor effect */
+.cursor::after {
+    content: '|';
+    animation: blink 1s step-end infinite;
+    color: #db2777; /* Tailwind pink-600 */
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+@keyframes flicker {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(0.95); }
+    25%, 75% { opacity: 0.9; }
+}
+
+.animate-float {
+    animation: float 4s ease-in-out infinite;
+}
+
+.animate-breathe {
+    animation: breathe 5s ease-in-out infinite;
+}
+
+.animate-flicker {
+    animation: flicker 0.2s infinite;
+}
+
+.translate-z-[-100px] {
+    transform: translateZ(-100px);
+}
+
+.translate-z-0 {
+    transform: translateZ(0);
+}
+
