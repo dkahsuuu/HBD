@@ -268,7 +268,23 @@ function triggerCelebration() {
 }
 
 // Typewriter Effect
-const message = `Happy Birthday meri jaan! 🎉\n\nMain humesha sochta tha ki zindagi mein kya khaas hoga, phir tum mil gayi.\n\nTumhari muskurahat mere din ki sabse khoobsurat cheez hai. Tumhare bina baatein adhuri lagti hain. You bring so much joy, peace, and madness into my life. ✨\n\nI just want to see you happy, always and forever. I am so lucky to have you. 🥺❤️\n\nBhagwan kare tumhe duniya ki saari khushiyan milein.`;
+const message = `Happy Birthday meri jaan! 🎂❤️
+
+Pata hai, tumhare birthday par sab log tumhe wish karenge, tumhari tareef karenge, aur kahenge ki tum kitni special ho...
+main bas itna kehna chahta hoon ki meri life mein tumhara hona hi apne aap mein ek khoobsurat coincidence hai. 🥺
+
+Tumhare saath har cheez thodi zyada special lagti hai —
+random si baatein, bina matlab ki hasi, choti-choti nok-jhok, aur woh moments jinka koi reason bhi nahi hota. ❤️
+
+Aaj tumhara birthday hai, isliye aaj meri ek hi wish hai —
+tum kabhi apni smile ko kisi ke liye mat khona.
+Aur agar kabhi koi wajah tumhari smile chheen-ne ki koshish kare...
+toh mujhe bula lena. 😌❤️
+
+Happy Birthday to the person who somehow became one of my favourite parts of life. 🫶🏻🎂✨
+
+Bas aaj ka din enjoy karo...
+aur haan, cake ka ek piece mere naam ka bhi rakhna. 😂❤️`;
 let i = 0;
 const speed = 45; // typing speed in ms
 const textElement = document.getElementById('typewriter-text');
@@ -498,3 +514,77 @@ document.addEventListener('mousemove', (e) => {
     if (cakeContainer) cakeContainer.style.transform = `translate(${x * 0.5}px, ${y * 0.5}px) scale(1)`;
     if (bokeh) bokeh.style.transform = `translate(${-x * 2}px, ${-y * 2}px)`;
 });
+
+
+// Gift Box Interactive Logic
+function openGift(num, element) {
+    if (element.classList.contains('open')) return;
+    
+    // Close any currently open gifts
+    document.querySelectorAll('.gift-wrapper.open').forEach(wrapper => {
+        wrapper.classList.remove('open');
+        wrapper.closest('.gift-item').style.zIndex = '10';
+    });
+
+    // Add shake animation
+    element.classList.add('animate-shake-gift');
+    
+    setTimeout(() => {
+        element.classList.remove('animate-shake-gift');
+        element.classList.add('open');
+        element.closest('.gift-item').style.zIndex = '50';
+        
+        // Spawn hearts/sparkles
+        spawnGiftParticles(element);
+        
+        // Center the opened card vertically in the screen
+        setTimeout(() => {
+            const card = element.querySelector('.memory-pop-card');
+            if (card) {
+                const rect = card.getBoundingClientRect();
+                const absoluteTop = rect.top + window.pageYOffset;
+                const scrollPos = absoluteTop - (window.innerHeight / 2) + (rect.height / 2);
+                window.scrollTo({ top: scrollPos, behavior: 'smooth' });
+            }
+        }, 800); // Trigger slightly earlier for smoother feel
+        
+    }, 500);
+}
+
+function spawnGiftParticles(giftWrapper) {
+    const emojis = ['✨', '💖', '⭐', '🌸'];
+    for(let i=0; i<12; i++) {
+        const p = document.createElement('div');
+        p.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+        p.className = 'absolute pointer-events-none particle-pop z-30 text-2xl drop-shadow-md';
+        p.style.left = '50%';
+        p.style.top = '20%'; // start near the lid
+        
+        // Randomize trajectory via CSS variables
+        const tx = (Math.random() * 160 - 80) + 'px';
+        const rot = (Math.random() * 360) + 'deg';
+        p.style.setProperty('--tx', tx);
+        p.style.setProperty('--rot', rot);
+        
+        giftWrapper.appendChild(p);
+        setTimeout(() => p.remove(), 1500);
+    }
+}
+
+function nextGift(currentNum) {
+    // Auto-close current gift
+    const currentWrapper = document.getElementById('gift-' + currentNum).querySelector('.gift-wrapper');
+    if (currentWrapper) {
+        currentWrapper.classList.remove('open');
+        currentWrapper.closest('.gift-item').style.zIndex = '10';
+    }
+
+    // Scroll to next gift
+    const nextNum = currentNum + 1;
+    const nextElement = document.getElementById('gift-' + nextNum);
+    if (nextElement) {
+        setTimeout(() => {
+            nextElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 300); // Wait a bit for close animation to start
+    }
+}

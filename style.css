@@ -121,3 +121,41 @@ body {
     transform: translateZ(0);
 }
 
+
+/* Gift Box Styles */
+.gift-wrapper.open .gift-lid {
+    transform: translateY(-80px) rotate(-15deg);
+    opacity: 0;
+}
+.gift-wrapper.open .gift-glow {
+    opacity: 0.8;
+}
+.gift-wrapper.open .memory-pop-card {
+    opacity: 1;
+    transform: translate(-50%, -20px) scale(1);
+    pointer-events: auto;
+}
+.gift-wrapper:hover:not(.open) .gift-lid {
+    transform: translateY(-5px) rotate(3deg);
+}
+
+@keyframes shakeGift {
+    0%, 100% { transform: translateX(0) rotate(0); }
+    20% { transform: translateX(-5px) rotate(-2deg); }
+    40% { transform: translateX(5px) rotate(2deg); }
+    60% { transform: translateX(-5px) rotate(-2deg); }
+    80% { transform: translateX(5px) rotate(2deg); }
+}
+
+.animate-shake-gift {
+    animation: shakeGift 0.5s ease-in-out;
+}
+
+@keyframes floatParticleUp {
+    0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+    100% { transform: translate(calc(-50% + var(--tx)), calc(-50% - 150px)) scale(1.5) rotate(var(--rot)); opacity: 0; }
+}
+
+.particle-pop {
+    animation: floatParticleUp 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
