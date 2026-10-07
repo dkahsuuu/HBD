@@ -1,5 +1,11 @@
 // Music controls
 const bgMusic = document.getElementById('bg-music');
+const bgMusicMain = document.getElementById('bg-music-main');
+const bgMusicNote = document.getElementById('bg-music-note');
+const bgMusicBox1 = document.getElementById('bg-music-box1');
+const bgMusicSec6 = document.getElementById('bg-music-sec6');
+const bgMusicSec7 = document.getElementById('bg-music-sec7');
+let activeMusic = bgMusic;
 const musicToggle = document.getElementById('music-toggle');
 const iconPlay = document.getElementById('music-icon-play');
 const iconPause = document.getElementById('music-icon-pause');
@@ -8,14 +14,19 @@ let isMusicPlaying = false;
 
 // Initialize audio volume
 bgMusic.volume = 0.3;
+bgMusicMain.volume = 0.3;
+bgMusicNote.volume = 0.3;
+bgMusicBox1.volume = 0.3;
+bgMusicSec6.volume = 0.3;
+bgMusicSec7.volume = 0.3;
 
 musicToggle.addEventListener('click', () => {
     if (isMusicPlaying) {
-        bgMusic.pause();
+        activeMusic.pause();
         iconPlay.classList.remove('hidden');
         iconPause.classList.add('hidden');
     } else {
-        bgMusic.play().catch(e => console.log("Audio play failed:", e));
+        activeMusic.play().catch(e => console.log("Audio play failed:", e));
         iconPlay.classList.add('hidden');
         iconPause.classList.remove('hidden');
     }
@@ -99,6 +110,76 @@ function nextSection(current, next) {
     const currentSec = document.getElementById(`sec-${current}`);
     const nextSec = document.getElementById(`sec-${next}`);
     
+    // Play music when entering section 2
+    if (next === 2) {
+        activeMusic = bgMusic;
+        activeMusic.play().then(() => {
+            isMusicPlaying = true;
+            iconPlay.classList.add('hidden');
+            iconPause.classList.remove('hidden');
+        }).catch(e => console.log("Audio play failed:", e));
+    }
+    
+    // Stop first music and play second music when leaving section 2
+    if (current === 2) {
+        bgMusic.pause();
+        
+        // Start second music
+        activeMusic = bgMusicMain;
+        activeMusic.play().then(() => {
+            isMusicPlaying = true;
+            iconPlay.classList.add('hidden');
+            iconPause.classList.remove('hidden');
+        }).catch(e => console.log("Audio play failed:", e));
+    }
+    
+    // Note page music logic
+    if (next === 4) {
+        bgMusicMain.pause();
+        
+        activeMusic = bgMusicNote;
+        activeMusic.play().then(() => {
+            isMusicPlaying = true;
+            iconPlay.classList.add('hidden');
+            iconPause.classList.remove('hidden');
+        }).catch(e => console.log("Audio play failed:", e));
+    }
+    
+    if (current === 4) {
+        bgMusicNote.pause();
+        
+        activeMusic = bgMusicMain;
+        activeMusic.play().then(() => {
+            isMusicPlaying = true;
+            iconPlay.classList.add('hidden');
+            iconPause.classList.remove('hidden');
+        }).catch(e => console.log("Audio play failed:", e));
+    }
+
+    // Logic for section 6
+    if (next === 6) {
+        activeMusic.pause();
+        
+        activeMusic = bgMusicSec6;
+        activeMusic.play().then(() => {
+            isMusicPlaying = true;
+            iconPlay.classList.add('hidden');
+            iconPause.classList.remove('hidden');
+        }).catch(e => console.log("Audio play failed:", e));
+    }
+
+    // Logic for section 7
+    if (next === 7) {
+        activeMusic.pause();
+        
+        activeMusic = bgMusicSec7;
+        activeMusic.play().then(() => {
+            isMusicPlaying = true;
+            iconPlay.classList.add('hidden');
+            iconPause.classList.remove('hidden');
+        }).catch(e => console.log("Audio play failed:", e));
+    }
+
     currentSec.style.opacity = '0';
     
     setTimeout(() => {
@@ -519,6 +600,17 @@ document.addEventListener('mousemove', (e) => {
 // Gift Box Interactive Logic
 function openGift(num, element) {
     if (element.classList.contains('open')) return;
+    
+    // Switch music for first box
+    if (num === 1) {
+        activeMusic.pause();
+        activeMusic = bgMusicBox1;
+        activeMusic.play().then(() => {
+            isMusicPlaying = true;
+            iconPlay.classList.add('hidden');
+            iconPause.classList.remove('hidden');
+        }).catch(e => console.log("Audio play failed:", e));
+    }
     
     // Close any currently open gifts
     document.querySelectorAll('.gift-wrapper.open').forEach(wrapper => {
